@@ -47,7 +47,7 @@ class SplitPane extends React.Component {
     // 1. size
     // 2. getDefaultSize(defaultSize, minsize, maxSize)
 
-    const { size, defaultSize, minSize, maxSize, primary ,shadowDocument} = props;
+    const { size, defaultSize, minSize, maxSize, primary } = props;
 
     const initialSize =
       size !== undefined
@@ -68,6 +68,7 @@ class SplitPane extends React.Component {
   }
 
   componentDidMount() {
+    const { shadowDocument } = this.props;
     shadowDocument.addEventListener('mouseup', this.onMouseUp);
     shadowDocument.addEventListener('mousemove', this.onMouseMove);
     shadowDocument.addEventListener('touchmove', this.onTouchMove);
@@ -79,6 +80,7 @@ class SplitPane extends React.Component {
   }
 
   componentWillUnmount() {
+    const { shadowDocument } = this.props;
     shadowDocument.removeEventListener('mouseup', this.onMouseUp);
     shadowDocument.removeEventListener('mousemove', this.onMouseMove);
     shadowDocument.removeEventListener('touchmove', this.onTouchMove);
