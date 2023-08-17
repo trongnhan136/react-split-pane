@@ -6,9 +6,9 @@ import { polyfill } from 'react-lifecycles-compat';
 import Pane from './Pane';
 import Resizer, { RESIZER_DEFAULT_CLASSNAME } from './Resizer';
 
-function unFocus(document, window) {
-  if (document.selection) {
-    document.selection.empty();
+function unFocus(shadowDocument, window) {
+  if (shadowDocument.selection) {
+    shadowDocument.selection.empty();
   } else {
     try {
       window.getSelection().removeAllRanges();
@@ -47,7 +47,7 @@ class SplitPane extends React.Component {
     // 1. size
     // 2. getDefaultSize(defaultSize, minsize, maxSize)
 
-    const { size, defaultSize, minSize, maxSize, primary } = props;
+    const { size, defaultSize, minSize, maxSize, primary ,shadowDocument} = props;
 
     const initialSize =
       size !== undefined
@@ -68,9 +68,9 @@ class SplitPane extends React.Component {
   }
 
   componentDidMount() {
-    document.addEventListener('mouseup', this.onMouseUp);
-    document.addEventListener('mousemove', this.onMouseMove);
-    document.addEventListener('touchmove', this.onTouchMove);
+    shadowDocument.addEventListener('mouseup', this.onMouseUp);
+    shadowDocument.addEventListener('mousemove', this.onMouseMove);
+    shadowDocument.addEventListener('touchmove', this.onTouchMove);
     this.setState(SplitPane.getSizeUpdate(this.props, this.state));
   }
 
@@ -79,9 +79,9 @@ class SplitPane extends React.Component {
   }
 
   componentWillUnmount() {
-    document.removeEventListener('mouseup', this.onMouseUp);
-    document.removeEventListener('mousemove', this.onMouseMove);
-    document.removeEventListener('touchmove', this.onTouchMove);
+    shadowDocument.removeEventListener('mouseup', this.onMouseUp);
+    shadowDocument.removeEventListener('mousemove', this.onMouseMove);
+    shadowDocument.removeEventListener('touchmove', this.onTouchMove);
   }
 
   onMouseDown(event) {
@@ -375,6 +375,7 @@ SplitPane.propTypes = {
   pane2Style: stylePropType,
   resizerClassName: PropTypes.string,
   step: PropTypes.number,
+  shadowDocument: Document,
 };
 
 SplitPane.defaultProps = {
@@ -385,6 +386,7 @@ SplitPane.defaultProps = {
   paneClassName: '',
   pane1ClassName: '',
   pane2ClassName: '',
+  shadowDocument: document
 };
 
 polyfill(SplitPane);
