@@ -387,7 +387,6 @@ SplitPane.propTypes = {
   pane2Style: stylePropType,
   resizerClassName: PropTypes.string,
   step: PropTypes.number,
-  shadowDocument: Document,
 };
 
 SplitPane.defaultProps = {
@@ -398,7 +397,6 @@ SplitPane.defaultProps = {
   paneClassName: '',
   pane1ClassName: '',
   pane2ClassName: '',
-  shadowDocument: document,
 };
 
 polyfill(SplitPane);

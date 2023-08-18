@@ -791,7 +791,6 @@ SplitPane.propTypes = {
   pane2Style: stylePropType,
   resizerClassName: PropTypes.string,
   step: PropTypes.number,
-  shadowDocument: Document,
 };
 SplitPane.defaultProps = {
   allowResize: true,
@@ -801,7 +800,6 @@ SplitPane.defaultProps = {
   paneClassName: '',
   pane1ClassName: '',
   pane2ClassName: '',
-  shadowDocument: document,
 };
 reactLifecyclesCompat.polyfill(SplitPane);
 
