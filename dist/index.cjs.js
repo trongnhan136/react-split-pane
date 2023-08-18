@@ -481,20 +481,18 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             minSize = _this$props2.minSize,
             onChange = _this$props2.onChange,
             split = _this$props2.split,
-            step = _this$props2.step;
+            step = _this$props2.step,
+            innerWindow = _this$props2.innerWindow;
           var _this$state = this.state,
             active = _this$state.active,
             position = _this$state.position;
+          var ownWindow =
+            innerWindow !== null && innerWindow !== void 0
+              ? innerWindow
+              : window;
 
           if (allowResize && active) {
-            var _innerWindow;
-
-            unFocus(
-              this.splitPane.ownerDocument,
-              (_innerWindow = innerWindow) !== null && _innerWindow !== void 0
-                ? _innerWindow
-                : window
-            );
+            unFocus(this.splitPane.ownerDocument, ownWindow);
             var isPrimaryFirst = this.props.primary === 'first';
             var ref = isPrimaryFirst ? this.pane1 : this.pane2;
             var ref2 = isPrimaryFirst ? this.pane2 : this.pane1;
@@ -523,8 +521,12 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                 }
 
                 var sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
-                var pane1Order = parseInt(window.getComputedStyle(node).order);
-                var pane2Order = parseInt(window.getComputedStyle(node2).order);
+                var pane1Order = parseInt(
+                  ownWindow.getComputedStyle(node).order
+                );
+                var pane2Order = parseInt(
+                  ownWindow.getComputedStyle(node2).order
+                );
 
                 if (pane1Order > pane2Order) {
                   sizeDelta = -sizeDelta;

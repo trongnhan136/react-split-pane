@@ -120,11 +120,21 @@ class SplitPane extends React.Component {
   }
 
   onTouchMove(event) {
-    const { allowResize, maxSize, minSize, onChange, split, step } = this.props;
+    const {
+      allowResize,
+      maxSize,
+      minSize,
+      onChange,
+      split,
+      step,
+      innerWindow,
+    } = this.props;
     const { active, position } = this.state;
 
+    const ownWindow = innerWindow ?? window;
+
     if (allowResize && active) {
-      unFocus(this.splitPane.ownerDocument, innerWindow ?? window);
+      unFocus(this.splitPane.ownerDocument, ownWindow);
       const isPrimaryFirst = this.props.primary === 'first';
       const ref = isPrimaryFirst ? this.pane1 : this.pane2;
       const ref2 = isPrimaryFirst ? this.pane2 : this.pane1;
@@ -151,8 +161,8 @@ class SplitPane extends React.Component {
           }
           let sizeDelta = isPrimaryFirst ? positionDelta : -positionDelta;
 
-          const pane1Order = parseInt(window.getComputedStyle(node).order);
-          const pane2Order = parseInt(window.getComputedStyle(node2).order);
+          const pane1Order = parseInt(ownWindow.getComputedStyle(node).order);
+          const pane2Order = parseInt(ownWindow.getComputedStyle(node2).order);
           if (pane1Order > pane2Order) {
             sizeDelta = -sizeDelta;
           }
