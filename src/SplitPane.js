@@ -31,7 +31,7 @@ function getDefaultSize(defaultSize, minSize, maxSize, draggedSize) {
 }
 
 function removeNullChildren(children) {
-  return React.Children.toArray(children).filter(c => c);
+  return React.Children.toArray(children).filter((c) => c);
 }
 class SplitPane extends React.Component {
   constructor(props) {
@@ -68,7 +68,7 @@ class SplitPane extends React.Component {
   }
 
   componentDidMount() {
-    const { shadowDocument } = this.props;
+    const shadowDocument = this.splitPane.ownerDocument;
     shadowDocument.addEventListener('mouseup', this.onMouseUp);
     shadowDocument.addEventListener('mousemove', this.onMouseMove);
     shadowDocument.addEventListener('touchmove', this.onTouchMove);
@@ -80,7 +80,7 @@ class SplitPane extends React.Component {
   }
 
   componentWillUnmount() {
-    const { shadowDocument } = this.props;
+    const shadowDocument = this.splitPane.ownerDocument;
     shadowDocument.removeEventListener('mouseup', this.onMouseUp);
     shadowDocument.removeEventListener('mousemove', this.onMouseMove);
     shadowDocument.removeEventListener('touchmove', this.onTouchMove);
@@ -94,9 +94,9 @@ class SplitPane extends React.Component {
   }
 
   onTouchStart(event) {
-    const { allowResize, onDragStarted, split } = this.props;
+    const { allowResize, onDragStarted, split, innerWindow } = this.props;
     if (allowResize) {
-      unFocus(document, window);
+      unFocus(this.splitPane.ownerDocument, innerWindow ?? window);
       const position =
         split === 'vertical'
           ? event.touches[0].clientX
@@ -124,7 +124,7 @@ class SplitPane extends React.Component {
     const { active, position } = this.state;
 
     if (allowResize && active) {
-      unFocus(document, window);
+      unFocus(this.splitPane.ownerDocument, innerWindow ?? window);
       const isPrimaryFirst = this.props.primary === 'first';
       const ref = isPrimaryFirst ? this.pane1 : this.pane2;
       const ref2 = isPrimaryFirst ? this.pane2 : this.pane1;
@@ -305,7 +305,7 @@ class SplitPane extends React.Component {
     return (
       <div
         className={classes.join(' ')}
-        ref={node => {
+        ref={(node) => {
           this.splitPane = node;
         }}
         style={style}
@@ -313,7 +313,7 @@ class SplitPane extends React.Component {
         <Pane
           className={pane1Classes}
           key="pane1"
-          eleRef={node => {
+          eleRef={(node) => {
             this.pane1 = node;
           }}
           size={pane1Size}
@@ -337,7 +337,7 @@ class SplitPane extends React.Component {
         <Pane
           className={pane2Classes}
           key="pane2"
-          eleRef={node => {
+          eleRef={(node) => {
             this.pane2 = node;
           }}
           size={pane2Size}
@@ -388,7 +388,7 @@ SplitPane.defaultProps = {
   paneClassName: '',
   pane1ClassName: '',
   pane2ClassName: '',
-  shadowDocument: document
+  shadowDocument: document,
 };
 
 polyfill(SplitPane);

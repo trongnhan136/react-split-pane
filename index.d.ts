@@ -26,7 +26,7 @@ export type SplitPaneProps = {
   resizerClassName?: string;
   step?: number;
   children?: React.ReactNode;
-  shadowDocument?: Document,
+  innerWindow?: Window;
 };
 
 export type SplitPaneState = {
