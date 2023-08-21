@@ -265,9 +265,10 @@ class SplitPane extends React.Component {
       style: styleProps,
     } = this.props;
 
-    const { pane1Size, pane2Size } = this.state;
+    const { pane1Size, pane2Size, active } = this.state;
 
     const disabledClass = allowResize ? '' : 'disabled';
+    const activedClass = active ? 'actived' : '';
     const resizerClassNamesIncludingDefault = resizerClassName
       ? `${resizerClassName} ${RESIZER_DEFAULT_CLASSNAME}`
       : resizerClassName;
@@ -304,7 +305,13 @@ class SplitPane extends React.Component {
       });
     }
 
-    const classes = ['SplitPane', className, split, disabledClass];
+    const classes = [
+      'SplitPane',
+      className,
+      split,
+      disabledClass,
+      activedClass,
+    ];
 
     const pane1Style = { ...paneStyle, ...pane1StyleProps };
     const pane2Style = { ...paneStyle, ...pane2StyleProps };

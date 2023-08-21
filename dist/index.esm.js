@@ -611,8 +611,10 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             styleProps = _this$props4.style;
           var _this$state3 = this.state,
             pane1Size = _this$state3.pane1Size,
-            pane2Size = _this$state3.pane2Size;
+            pane2Size = _this$state3.pane2Size,
+            active = _this$state3.active;
           var disabledClass = allowResize ? '' : 'disabled';
+          var activedClass = active ? 'actived' : '';
           var resizerClassNamesIncludingDefault = resizerClassName
             ? ''.concat(resizerClassName, ' ').concat(RESIZER_DEFAULT_CLASSNAME)
             : resizerClassName;
@@ -650,7 +652,13 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             });
           }
 
-          var classes = ['SplitPane', className, split, disabledClass];
+          var classes = [
+            'SplitPane',
+            className,
+            split,
+            disabledClass,
+            activedClass,
+          ];
 
           var pane1Style = _objectSpread2({}, paneStyle, {}, pane1StyleProps);
 
