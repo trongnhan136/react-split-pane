@@ -7,7 +7,8 @@ function _interopDefault(ex) {
 }
 
 var React = _interopDefault(require('react'));
-var PropTypes = _interopDefault(require('prop-types'));
+var PropTypes = require('prop-types');
+var PropTypes__default = _interopDefault(PropTypes);
 var stylePropType = _interopDefault(require('react-style-proptype'));
 var reactLifecyclesCompat = require('react-lifecycles-compat');
 
@@ -228,12 +229,15 @@ var Pane = /*#__PURE__*/ (function (_React$PureComponent) {
 })(React.PureComponent);
 
 Pane.propTypes = {
-  className: PropTypes.string.isRequired,
-  children: PropTypes.node.isRequired,
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  split: PropTypes.oneOf(['vertical', 'horizontal']),
+  className: PropTypes__default.string.isRequired,
+  children: PropTypes__default.node.isRequired,
+  size: PropTypes__default.oneOfType([
+    PropTypes__default.string,
+    PropTypes__default.number,
+  ]),
+  split: PropTypes__default.oneOf(['vertical', 'horizontal']),
   style: stylePropType,
-  eleRef: PropTypes.func,
+  eleRef: PropTypes__default.func,
 };
 Pane.defaultProps = {};
 
@@ -263,8 +267,9 @@ var Resizer = /*#__PURE__*/ (function (_React$Component) {
           _onTouchStart = _this$props.onTouchStart,
           resizerClassName = _this$props.resizerClassName,
           split = _this$props.split,
-          style = _this$props.style;
-        var classes = [resizerClassName, split, className];
+          style = _this$props.style,
+          activedClassName = _this$props.activedClassName;
+        var classes = [resizerClassName, split, className, activedClassName];
         return /*#__PURE__*/ React.createElement('span', {
           role: 'presentation',
           className: classes.join(' '),
@@ -305,18 +310,20 @@ var Resizer = /*#__PURE__*/ (function (_React$Component) {
 })(React.Component);
 
 Resizer.propTypes = {
-  className: PropTypes.string.isRequired,
-  onClick: PropTypes.func,
-  onDoubleClick: PropTypes.func,
-  onMouseDown: PropTypes.func.isRequired,
-  onTouchStart: PropTypes.func.isRequired,
-  onTouchEnd: PropTypes.func.isRequired,
-  split: PropTypes.oneOf(['vertical', 'horizontal']),
+  className: PropTypes__default.string.isRequired,
+  onClick: PropTypes__default.func,
+  onDoubleClick: PropTypes__default.func,
+  onMouseDown: PropTypes__default.func.isRequired,
+  onTouchStart: PropTypes__default.func.isRequired,
+  onTouchEnd: PropTypes__default.func.isRequired,
+  split: PropTypes__default.oneOf(['vertical', 'horizontal']),
   style: stylePropType,
-  resizerClassName: PropTypes.string.isRequired,
+  resizerClassName: PropTypes__default.string.isRequired,
+  activedClassName: PropTypes__default.string,
 };
 Resizer.defaultProps = {
   resizerClassName: RESIZER_DEFAULT_CLASSNAME,
+  activedClassName: '',
 };
 
 function unFocus(shadowDocument, window) {
@@ -622,7 +629,6 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             pane2Size = _this$state3.pane2Size,
             active = _this$state3.active;
           var disabledClass = allowResize ? '' : 'disabled';
-          var activedClass = active ? 'actived' : '';
           var resizerClassNamesIncludingDefault = resizerClassName
             ? ''.concat(resizerClassName, ' ').concat(RESIZER_DEFAULT_CLASSNAME)
             : resizerClassName;
@@ -660,13 +666,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             });
           }
 
-          var classes = [
-            'SplitPane',
-            className,
-            split,
-            disabledClass,
-            activedClass,
-          ];
+          var classes = ['SplitPane', className, split, disabledClass];
 
           var pane1Style = _objectSpread2({}, paneStyle, {}, pane1StyleProps);
 
@@ -698,6 +698,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
               notNullChildren[0]
             ),
             /*#__PURE__*/ React.createElement(Resizer, {
+              activedClassName: active ? 'actived' : '',
               className: disabledClass,
               onClick: onResizerClick,
               onDoubleClick: onResizerDoubleClick,
@@ -774,31 +775,43 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
 })(React.Component);
 
 SplitPane.propTypes = {
-  allowResize: PropTypes.bool,
-  children: PropTypes.arrayOf(PropTypes.node).isRequired,
-  className: PropTypes.string,
-  primary: PropTypes.oneOf(['first', 'second']),
-  minSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  maxSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  allowResize: PropTypes__default.bool,
+  children: PropTypes__default.arrayOf(PropTypes__default.node).isRequired,
+  className: PropTypes__default.string,
+  primary: PropTypes__default.oneOf(['first', 'second']),
+  minSize: PropTypes__default.oneOfType([
+    PropTypes__default.string,
+    PropTypes__default.number,
+  ]),
+  maxSize: PropTypes__default.oneOfType([
+    PropTypes__default.string,
+    PropTypes__default.number,
+  ]),
   // eslint-disable-next-line react/no-unused-prop-types
-  defaultSize: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
-  split: PropTypes.oneOf(['vertical', 'horizontal']),
-  onDragStarted: PropTypes.func,
-  onDragFinished: PropTypes.func,
-  onChange: PropTypes.func,
-  onResizerClick: PropTypes.func,
-  onResizerDoubleClick: PropTypes.func,
+  defaultSize: PropTypes__default.oneOfType([
+    PropTypes__default.string,
+    PropTypes__default.number,
+  ]),
+  size: PropTypes__default.oneOfType([
+    PropTypes__default.string,
+    PropTypes__default.number,
+  ]),
+  split: PropTypes__default.oneOf(['vertical', 'horizontal']),
+  onDragStarted: PropTypes__default.func,
+  onDragFinished: PropTypes__default.func,
+  onChange: PropTypes__default.func,
+  onResizerClick: PropTypes__default.func,
+  onResizerDoubleClick: PropTypes__default.func,
   style: stylePropType,
   resizerStyle: stylePropType,
-  paneClassName: PropTypes.string,
-  pane1ClassName: PropTypes.string,
-  pane2ClassName: PropTypes.string,
+  paneClassName: PropTypes__default.string,
+  pane1ClassName: PropTypes__default.string,
+  pane2ClassName: PropTypes__default.string,
   paneStyle: stylePropType,
   pane1Style: stylePropType,
   pane2Style: stylePropType,
-  resizerClassName: PropTypes.string,
-  step: PropTypes.number,
+  resizerClassName: PropTypes__default.string,
+  step: PropTypes__default.number,
 };
 SplitPane.defaultProps = {
   allowResize: true,

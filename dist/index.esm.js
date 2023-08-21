@@ -255,8 +255,9 @@ var Resizer = /*#__PURE__*/ (function (_React$Component) {
           _onTouchStart = _this$props.onTouchStart,
           resizerClassName = _this$props.resizerClassName,
           split = _this$props.split,
-          style = _this$props.style;
-        var classes = [resizerClassName, split, className];
+          style = _this$props.style,
+          activedClassName = _this$props.activedClassName;
+        var classes = [resizerClassName, split, className, activedClassName];
         return /*#__PURE__*/ React.createElement('span', {
           role: 'presentation',
           className: classes.join(' '),
@@ -306,9 +307,11 @@ Resizer.propTypes = {
   split: PropTypes.oneOf(['vertical', 'horizontal']),
   style: stylePropType,
   resizerClassName: PropTypes.string.isRequired,
+  activedClassName: PropTypes.string,
 };
 Resizer.defaultProps = {
   resizerClassName: RESIZER_DEFAULT_CLASSNAME,
+  activedClassName: '',
 };
 
 function unFocus(shadowDocument, window) {
@@ -614,7 +617,6 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             pane2Size = _this$state3.pane2Size,
             active = _this$state3.active;
           var disabledClass = allowResize ? '' : 'disabled';
-          var activedClass = active ? 'actived' : '';
           var resizerClassNamesIncludingDefault = resizerClassName
             ? ''.concat(resizerClassName, ' ').concat(RESIZER_DEFAULT_CLASSNAME)
             : resizerClassName;
@@ -652,13 +654,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             });
           }
 
-          var classes = [
-            'SplitPane',
-            className,
-            split,
-            disabledClass,
-            activedClass,
-          ];
+          var classes = ['SplitPane', className, split, disabledClass];
 
           var pane1Style = _objectSpread2({}, paneStyle, {}, pane1StyleProps);
 
@@ -690,6 +686,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
               notNullChildren[0]
             ),
             /*#__PURE__*/ React.createElement(Resizer, {
+              activedClassName: active ? 'actived' : '',
               className: disabledClass,
               onClick: onResizerClick,
               onDoubleClick: onResizerDoubleClick,
