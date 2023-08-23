@@ -27,6 +27,7 @@ export type SplitPaneProps = {
   step?: number;
   children?: React.ReactNode;
   innerWindow?: Window;
+  fullscreen?: boolean;
 };
 
 export type SplitPaneState = {

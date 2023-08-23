@@ -440,9 +440,10 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             allowResize = _this$props.allowResize,
             onDragStarted = _this$props.onDragStarted,
             split = _this$props.split,
-            innerWindow = _this$props.innerWindow;
+            innerWindow = _this$props.innerWindow,
+            fullscreen = _this$props.fullscreen;
 
-          if (allowResize) {
+          if (allowResize && !fullscreen) {
             unFocus(
               this.splitPane.ownerDocument,
               innerWindow !== null && innerWindow !== void 0
@@ -489,7 +490,8 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             onChange = _this$props2.onChange,
             split = _this$props2.split,
             step = _this$props2.step,
-            innerWindow = _this$props2.innerWindow;
+            innerWindow = _this$props2.innerWindow,
+            fullscreen = _this$props2.fullscreen;
           var _this$state = this.state,
             active = _this$state.active,
             position = _this$state.position;
@@ -498,7 +500,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
               ? innerWindow
               : window;
 
-          if (allowResize && active) {
+          if (allowResize && !fullscreen && active) {
             unFocus(this.splitPane.ownerDocument, ownWindow);
             var isPrimaryFirst = this.props.primary === 'first';
             var ref = isPrimaryFirst ? this.pane1 : this.pane2;
@@ -587,12 +589,13 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
         value: function onMouseUp() {
           var _this$props3 = this.props,
             allowResize = _this$props3.allowResize,
+            fullscreen = _this$props3.fullscreen,
             onDragFinished = _this$props3.onDragFinished;
           var _this$state2 = this.state,
             active = _this$state2.active,
             draggedSize = _this$state2.draggedSize;
 
-          if (allowResize && active) {
+          if (allowResize && !fullscreen && active) {
             if (typeof onDragFinished === 'function') {
               onDragFinished(draggedSize);
             }
@@ -623,12 +626,13 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             resizerClassName = _this$props4.resizerClassName,
             resizerStyle = _this$props4.resizerStyle,
             split = _this$props4.split,
-            styleProps = _this$props4.style;
+            styleProps = _this$props4.style,
+            fullscreen = _this$props4.fullscreen;
           var _this$state3 = this.state,
             pane1Size = _this$state3.pane1Size,
             pane2Size = _this$state3.pane2Size,
             active = _this$state3.active;
-          var disabledClass = allowResize ? '' : 'disabled';
+          var disabledClass = allowResize && !fullscreen ? '' : 'disabled';
           var resizerClassNamesIncludingDefault = resizerClassName
             ? ''.concat(resizerClassName, ' ').concat(RESIZER_DEFAULT_CLASSNAME)
             : resizerClassName;
@@ -691,39 +695,41 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                 eleRef: function eleRef(node) {
                   _this2.pane1 = node;
                 },
-                size: pane1Size,
+                size: fullscreen ? undefined : pane1Size,
                 split: split,
                 style: pane1Style,
               },
               notNullChildren[0]
             ),
-            /*#__PURE__*/ React.createElement(Resizer, {
-              activedClassName: active ? 'actived' : '',
-              className: disabledClass,
-              onClick: onResizerClick,
-              onDoubleClick: onResizerDoubleClick,
-              onMouseDown: this.onMouseDown,
-              onTouchStart: this.onTouchStart,
-              onTouchEnd: this.onMouseUp,
-              key: 'resizer',
-              resizerClassName: resizerClassNamesIncludingDefault,
-              split: split,
-              style: resizerStyle || {},
-            }),
-            /*#__PURE__*/ React.createElement(
-              Pane,
-              {
-                className: pane2Classes,
-                key: 'pane2',
-                eleRef: function eleRef(node) {
-                  _this2.pane2 = node;
-                },
-                size: pane2Size,
+            !fullscreen &&
+              /*#__PURE__*/ React.createElement(Resizer, {
+                activedClassName: active ? 'actived' : '',
+                className: disabledClass,
+                onClick: onResizerClick,
+                onDoubleClick: onResizerDoubleClick,
+                onMouseDown: this.onMouseDown,
+                onTouchStart: this.onTouchStart,
+                onTouchEnd: this.onMouseUp,
+                key: 'resizer',
+                resizerClassName: resizerClassNamesIncludingDefault,
                 split: split,
-                style: pane2Style,
-              },
-              notNullChildren[1]
-            )
+                style: resizerStyle || {},
+              }),
+            !fullscreen &&
+              /*#__PURE__*/ React.createElement(
+                Pane,
+                {
+                  className: pane2Classes,
+                  key: 'pane2',
+                  eleRef: function eleRef(node) {
+                    _this2.pane2 = node;
+                  },
+                  size: pane2Size,
+                  split: split,
+                  style: pane2Style,
+                },
+                notNullChildren[1]
+              )
           );
         },
       },
@@ -812,6 +818,7 @@ SplitPane.propTypes = {
   pane2Style: stylePropType,
   resizerClassName: PropTypes__default.string,
   step: PropTypes__default.number,
+  fullscreen: PropTypes__default.bool,
 };
 SplitPane.defaultProps = {
   allowResize: true,
@@ -821,6 +828,7 @@ SplitPane.defaultProps = {
   paneClassName: '',
   pane1ClassName: '',
   pane2ClassName: '',
+  fullscreen: false,
 };
 reactLifecyclesCompat.polyfill(SplitPane);
 

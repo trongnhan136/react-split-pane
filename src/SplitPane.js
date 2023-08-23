@@ -94,8 +94,14 @@ class SplitPane extends React.Component {
   }
 
   onTouchStart(event) {
-    const { allowResize, onDragStarted, split, innerWindow } = this.props;
-    if (allowResize) {
+    const {
+      allowResize,
+      onDragStarted,
+      split,
+      innerWindow,
+      fullscreen,
+    } = this.props;
+    if (allowResize && !fullscreen) {
       unFocus(this.splitPane.ownerDocument, innerWindow ?? window);
       const position =
         split === 'vertical'
@@ -128,12 +134,13 @@ class SplitPane extends React.Component {
       split,
       step,
       innerWindow,
+      fullscreen,
     } = this.props;
     const { active, position } = this.state;
 
     const ownWindow = innerWindow ?? window;
 
-    if (allowResize && active) {
+    if (allowResize && !fullscreen && active) {
       unFocus(this.splitPane.ownerDocument, ownWindow);
       const isPrimaryFirst = this.props.primary === 'first';
       const ref = isPrimaryFirst ? this.pane1 : this.pane2;
@@ -203,9 +210,9 @@ class SplitPane extends React.Component {
   }
 
   onMouseUp() {
-    const { allowResize, onDragFinished } = this.props;
+    const { allowResize, fullscreen, onDragFinished } = this.props;
     const { active, draggedSize } = this.state;
-    if (allowResize && active) {
+    if (allowResize && !fullscreen && active) {
       if (typeof onDragFinished === 'function') {
         onDragFinished(draggedSize);
       }
@@ -263,11 +270,12 @@ class SplitPane extends React.Component {
       resizerStyle,
       split,
       style: styleProps,
+      fullscreen,
     } = this.props;
 
     const { pane1Size, pane2Size, active } = this.state;
 
-    const disabledClass = allowResize ? '' : 'disabled';
+    const disabledClass = allowResize && !fullscreen ? '' : 'disabled';
     const resizerClassNamesIncludingDefault = resizerClassName
       ? `${resizerClassName} ${RESIZER_DEFAULT_CLASSNAME}`
       : resizerClassName;
@@ -326,37 +334,42 @@ class SplitPane extends React.Component {
           eleRef={(node) => {
             this.pane1 = node;
           }}
-          size={pane1Size}
+          size={fullscreen ? undefined : pane1Size}
           split={split}
           style={pane1Style}
         >
           {notNullChildren[0]}
         </Pane>
-        <Resizer
-          activedClassName={active ? 'actived' : ''}
-          className={disabledClass}
-          onClick={onResizerClick}
-          onDoubleClick={onResizerDoubleClick}
-          onMouseDown={this.onMouseDown}
-          onTouchStart={this.onTouchStart}
-          onTouchEnd={this.onMouseUp}
-          key="resizer"
-          resizerClassName={resizerClassNamesIncludingDefault}
-          split={split}
-          style={resizerStyle || {}}
-        />
-        <Pane
-          className={pane2Classes}
-          key="pane2"
-          eleRef={(node) => {
-            this.pane2 = node;
-          }}
-          size={pane2Size}
-          split={split}
-          style={pane2Style}
-        >
-          {notNullChildren[1]}
-        </Pane>
+        {!fullscreen && (
+          <Resizer
+            activedClassName={active ? 'actived' : ''}
+            className={disabledClass}
+            onClick={onResizerClick}
+            onDoubleClick={onResizerDoubleClick}
+            onMouseDown={this.onMouseDown}
+            onTouchStart={this.onTouchStart}
+            onTouchEnd={this.onMouseUp}
+            key="resizer"
+            resizerClassName={resizerClassNamesIncludingDefault}
+            split={split}
+            style={resizerStyle || {}}
+          />
+        )}
+
+        {!fullscreen && (
+          <Pane
+            className={pane2Classes}
+            key="pane2"
+            eleRef={(node) => {
+              this.pane2 = node;
+            }}
+            size={pane2Size}
+            split={split}
+            style={pane2Style}
+          >
+            {notNullChildren[1]}
+          </Pane>
+        )}
       </div>
     );
   }
@@ -388,6 +401,7 @@ SplitPane.propTypes = {
   pane2Style: stylePropType,
   resizerClassName: PropTypes.string,
   step: PropTypes.number,
+  fullscreen: PropTypes.bool,
 };
 
 SplitPane.defaultProps = {
@@ -398,6 +412,7 @@ SplitPane.defaultProps = {
   paneClassName: '',
   pane1ClassName: '',
   pane2ClassName: '',
+  fullscreen: false,
 };
 
 polyfill(SplitPane);
