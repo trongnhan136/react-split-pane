@@ -88,7 +88,7 @@ class SplitPane extends React.Component {
   }
 
   resetSize() {
-    const { size, defaultSize, minSize, maxSize } = props;
+    const { size, defaultSize, minSize, maxSize } = this.props;
 
     const initialSize =
       size !== undefined

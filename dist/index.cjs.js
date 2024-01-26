@@ -423,11 +423,11 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       {
         key: 'resetSize',
         value: function resetSize() {
-          var _props = props,
-            size = _props.size,
-            defaultSize = _props.defaultSize,
-            minSize = _props.minSize,
-            maxSize = _props.maxSize;
+          var _this$props = this.props,
+            size = _this$props.size,
+            defaultSize = _this$props.defaultSize,
+            minSize = _this$props.minSize,
+            maxSize = _this$props.maxSize;
           var initialSize =
             size !== undefined
               ? size
@@ -457,12 +457,12 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       {
         key: 'onTouchStart',
         value: function onTouchStart(event) {
-          var _this$props = this.props,
-            allowResize = _this$props.allowResize,
-            onDragStarted = _this$props.onDragStarted,
-            split = _this$props.split,
-            innerWindow = _this$props.innerWindow,
-            fullscreen = _this$props.fullscreen;
+          var _this$props2 = this.props,
+            allowResize = _this$props2.allowResize,
+            onDragStarted = _this$props2.onDragStarted,
+            split = _this$props2.split,
+            innerWindow = _this$props2.innerWindow,
+            fullscreen = _this$props2.fullscreen;
 
           if (allowResize && !fullscreen) {
             unFocus(
@@ -504,15 +504,15 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       {
         key: 'onTouchMove',
         value: function onTouchMove(event) {
-          var _this$props2 = this.props,
-            allowResize = _this$props2.allowResize,
-            maxSize = _this$props2.maxSize,
-            minSize = _this$props2.minSize,
-            onChange = _this$props2.onChange,
-            split = _this$props2.split,
-            step = _this$props2.step,
-            innerWindow = _this$props2.innerWindow,
-            fullscreen = _this$props2.fullscreen;
+          var _this$props3 = this.props,
+            allowResize = _this$props3.allowResize,
+            maxSize = _this$props3.maxSize,
+            minSize = _this$props3.minSize,
+            onChange = _this$props3.onChange,
+            split = _this$props3.split,
+            step = _this$props3.step,
+            innerWindow = _this$props3.innerWindow,
+            fullscreen = _this$props3.fullscreen;
           var _this$state = this.state,
             active = _this$state.active,
             position = _this$state.position;
@@ -608,10 +608,10 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       {
         key: 'onMouseUp',
         value: function onMouseUp() {
-          var _this$props3 = this.props,
-            allowResize = _this$props3.allowResize,
-            fullscreen = _this$props3.fullscreen,
-            onDragFinished = _this$props3.onDragFinished;
+          var _this$props4 = this.props,
+            allowResize = _this$props4.allowResize,
+            fullscreen = _this$props4.fullscreen,
+            onDragFinished = _this$props4.onDragFinished;
           var _this$state2 = this.state,
             active = _this$state2.active,
             draggedSize = _this$state2.draggedSize;
@@ -632,23 +632,23 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
         value: function render() {
           var _this2 = this;
 
-          var _this$props4 = this.props,
-            allowResize = _this$props4.allowResize,
-            children = _this$props4.children,
-            className = _this$props4.className,
-            onResizerClick = _this$props4.onResizerClick,
-            onResizerDoubleClick = _this$props4.onResizerDoubleClick,
-            paneClassName = _this$props4.paneClassName,
-            pane1ClassName = _this$props4.pane1ClassName,
-            pane2ClassName = _this$props4.pane2ClassName,
-            paneStyle = _this$props4.paneStyle,
-            pane1StyleProps = _this$props4.pane1Style,
-            pane2StyleProps = _this$props4.pane2Style,
-            resizerClassName = _this$props4.resizerClassName,
-            resizerStyle = _this$props4.resizerStyle,
-            split = _this$props4.split,
-            styleProps = _this$props4.style,
-            fullscreen = _this$props4.fullscreen;
+          var _this$props5 = this.props,
+            allowResize = _this$props5.allowResize,
+            children = _this$props5.children,
+            className = _this$props5.className,
+            onResizerClick = _this$props5.onResizerClick,
+            onResizerDoubleClick = _this$props5.onResizerDoubleClick,
+            paneClassName = _this$props5.paneClassName,
+            pane1ClassName = _this$props5.pane1ClassName,
+            pane2ClassName = _this$props5.pane2ClassName,
+            paneStyle = _this$props5.paneStyle,
+            pane1StyleProps = _this$props5.pane1Style,
+            pane2StyleProps = _this$props5.pane2Style,
+            resizerClassName = _this$props5.resizerClassName,
+            resizerStyle = _this$props5.resizerStyle,
+            split = _this$props5.split,
+            styleProps = _this$props5.style,
+            fullscreen = _this$props5.fullscreen;
           console.log(this.state);
           var _this$state3 = this.state,
             pane1Size = _this$state3.pane1Size,
