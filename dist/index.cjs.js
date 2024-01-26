@@ -371,7 +371,8 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
     _this.onTouchStart = _this.onTouchStart.bind(_assertThisInitialized(_this));
     _this.onMouseMove = _this.onMouseMove.bind(_assertThisInitialized(_this));
     _this.onTouchMove = _this.onTouchMove.bind(_assertThisInitialized(_this));
-    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this)); // order of setting panel sizes.
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
+    _this.resetSize = _this.resetSize.bind(_assertThisInitialized(_this)); // order of setting panel sizes.
     // 1. size
     // 2. getDefaultSize(defaultSize, minsize, maxSize)
 
@@ -417,6 +418,26 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
           shadowDocument.removeEventListener('mouseup', this.onMouseUp);
           shadowDocument.removeEventListener('mousemove', this.onMouseMove);
           shadowDocument.removeEventListener('touchmove', this.onTouchMove);
+        },
+      },
+      {
+        key: 'resetSize',
+        value: function resetSize() {
+          var _props = props,
+            size = _props.size,
+            defaultSize = _props.defaultSize,
+            minSize = _props.minSize,
+            maxSize = _props.maxSize;
+          var initialSize =
+            size !== undefined
+              ? size
+              : getDefaultSize(defaultSize, minSize, maxSize, null);
+          this.setState({
+            active: false,
+            resized: false,
+            pane1Size: primary === 'first' ? initialSize : undefined,
+            pane2Size: primary === 'second' ? initialSize : undefined,
+          });
         },
       },
       {
@@ -628,6 +649,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             split = _this$props4.split,
             styleProps = _this$props4.style,
             fullscreen = _this$props4.fullscreen;
+          console.log(this.state);
           var _this$state3 = this.state,
             pane1Size = _this$state3.pane1Size,
             pane2Size = _this$state3.pane2Size,

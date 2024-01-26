@@ -42,6 +42,7 @@ class SplitPane extends React.Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
+    this.resetSize = this.resetSize.bind(this);
 
     // order of setting panel sizes.
     // 1. size
@@ -84,6 +85,21 @@ class SplitPane extends React.Component {
     shadowDocument.removeEventListener('mouseup', this.onMouseUp);
     shadowDocument.removeEventListener('mousemove', this.onMouseMove);
     shadowDocument.removeEventListener('touchmove', this.onTouchMove);
+  }
+
+  resetSize() {
+    const { size, defaultSize, minSize, maxSize } = props;
+
+    const initialSize =
+      size !== undefined
+        ? size
+        : getDefaultSize(defaultSize, minSize, maxSize, null);
+    this.setState({
+      active: false,
+      resized: false,
+      pane1Size: primary === 'first' ? initialSize : undefined,
+      pane2Size: primary === 'second' ? initialSize : undefined,
+    });
   }
 
   onMouseDown(event) {
@@ -272,6 +288,8 @@ class SplitPane extends React.Component {
       style: styleProps,
       fullscreen,
     } = this.props;
+
+    console.log(this.state);
 
     const { pane1Size, pane2Size, active } = this.state;
 
