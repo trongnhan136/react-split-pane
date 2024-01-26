@@ -427,7 +427,8 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             size = _this$props.size,
             defaultSize = _this$props.defaultSize,
             minSize = _this$props.minSize,
-            maxSize = _this$props.maxSize;
+            maxSize = _this$props.maxSize,
+            primary = _this$props.primary;
           var initialSize =
             size !== undefined
               ? size
