@@ -94,7 +94,7 @@ class SplitPane extends React.Component {
       size !== undefined
         ? size
         : getDefaultSize(defaultSize, minSize, maxSize, null);
-    console.log('size --- ', size, defaultSize, initialSize);
+
     this.setState({
       active: false,
       resized: false,
@@ -291,8 +291,6 @@ class SplitPane extends React.Component {
       style: styleProps,
       fullscreen,
     } = this.props;
-
-    console.log(this.state);
 
     const { pane1Size, pane2Size, active } = this.state;
 

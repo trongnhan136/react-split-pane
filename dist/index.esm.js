@@ -421,7 +421,6 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             size !== undefined
               ? size
               : getDefaultSize(defaultSize, minSize, maxSize, null);
-          console.log('size --- ', size, defaultSize, initialSize);
           this.setState({
             active: false,
             resized: false,
@@ -641,7 +640,6 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             split = _this$props5.split,
             styleProps = _this$props5.style,
             fullscreen = _this$props5.fullscreen;
-          console.log(this.state);
           var _this$state3 = this.state,
             pane1Size = _this$state3.pane1Size,
             pane2Size = _this$state3.pane2Size,
