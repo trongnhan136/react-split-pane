@@ -94,9 +94,12 @@ class SplitPane extends React.Component {
       size !== undefined
         ? size
         : getDefaultSize(defaultSize, minSize, maxSize, null);
+    console.log('size --- ', size, defaultSize, initialSize);
     this.setState({
       active: false,
       resized: false,
+      draggedSize: undefined,
+      position: undefined,
       pane1Size: primary === 'first' ? initialSize : undefined,
       pane2Size: primary === 'second' ? initialSize : undefined,
     });
