@@ -217,6 +217,7 @@ class SplitPane extends React.Component {
 
           if (onChange) onChange(newSize);
 
+          console.log(' go here');
           this.setState({
             draggedSize: newSize,
             [isPrimaryFirst ? 'pane1Size' : 'pane2Size']: newSize,

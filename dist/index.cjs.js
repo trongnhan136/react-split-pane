@@ -589,6 +589,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                 }
 
                 if (onChange) onChange(newSize);
+                console.log(' go here');
                 this.setState(
                   _defineProperty(
                     {
