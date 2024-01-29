@@ -51,8 +51,6 @@ declare class SplitPane extends React.Component<
 
   onMouseUp(): void;
 
-  resetSize(doubleClickSize?: number): void;
-
   static getSizeUpdate(
     props: SplitPaneProps,
     state: SplitPaneState

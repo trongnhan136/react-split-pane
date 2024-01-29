@@ -87,22 +87,6 @@ class SplitPane extends React.Component {
     shadowDocument.removeEventListener('touchmove', this.onTouchMove);
   }
 
-  resetSize(doubleClickSize) {
-    const { size, defaultSize, minSize, maxSize, primary } = this.props;
-
-    const initialSize =
-      size !== undefined
-        ? size
-        : getDefaultSize(defaultSize, minSize, maxSize, null);
-    this.setState({
-      active: false,
-      resized: false,
-      draggedSize: null,
-      position: null,
-      pane1Size: doubleClickSize,
-    });
-  }
-
   onMouseDown(event) {
     const eventWithTouches = Object.assign({}, event, {
       touches: [{ clientX: event.clientX, clientY: event.clientY }],
@@ -217,6 +201,7 @@ class SplitPane extends React.Component {
 
           if (onChange) onChange(newSize);
 
+          console;
           this.setState({
             draggedSize: newSize,
             [isPrimaryFirst ? 'pane1Size' : 'pane2Size']: newSize,
@@ -243,7 +228,6 @@ class SplitPane extends React.Component {
     const { instanceProps } = state;
 
     if (instanceProps.size === props.size && props.size !== undefined) {
-      console.log('getSizeUpdate default', instanceProps.size, props.size);
       return {};
     }
 
@@ -257,7 +241,6 @@ class SplitPane extends React.Component {
             state.draggedSize
           );
 
-    console.log('getSizeUpdate ', newSize, props.defaultSize);
     if (props.size !== undefined) {
       newState.draggedSize = newSize;
     }
@@ -338,6 +321,8 @@ class SplitPane extends React.Component {
 
     const pane1Classes = ['Pane1', paneClassName, pane1ClassName].join(' ');
     const pane2Classes = ['Pane2', paneClassName, pane2ClassName].join(' ');
+
+    console.log(this.state);
 
     return (
       <div
