@@ -339,6 +339,8 @@ class SplitPane extends React.Component {
     const pane1Classes = ['Pane1', paneClassName, pane1ClassName].join(' ');
     const pane2Classes = ['Pane2', paneClassName, pane2ClassName].join(' ');
 
+    console.log(this.state);
+
     return (
       <div
         className={classes.join(' ')}

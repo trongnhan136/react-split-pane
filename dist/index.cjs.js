@@ -712,6 +712,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
 
           var pane1Classes = ['Pane1', paneClassName, pane1ClassName].join(' ');
           var pane2Classes = ['Pane2', paneClassName, pane2ClassName].join(' ');
+          console.log(this.state);
           return /*#__PURE__*/ React.createElement(
             'div',
             {
