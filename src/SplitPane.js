@@ -42,7 +42,6 @@ class SplitPane extends React.Component {
     this.onMouseMove = this.onMouseMove.bind(this);
     this.onTouchMove = this.onTouchMove.bind(this);
     this.onMouseUp = this.onMouseUp.bind(this);
-    this.resetSize = this.resetSize.bind(this);
 
     // order of setting panel sizes.
     // 1. size

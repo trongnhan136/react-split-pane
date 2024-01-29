@@ -359,8 +359,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
     _this.onTouchStart = _this.onTouchStart.bind(_assertThisInitialized(_this));
     _this.onMouseMove = _this.onMouseMove.bind(_assertThisInitialized(_this));
     _this.onTouchMove = _this.onTouchMove.bind(_assertThisInitialized(_this));
-    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
-    _this.resetSize = _this.resetSize.bind(_assertThisInitialized(_this)); // order of setting panel sizes.
+    _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this)); // order of setting panel sizes.
     // 1. size
     // 2. getDefaultSize(defaultSize, minsize, maxSize)
 
