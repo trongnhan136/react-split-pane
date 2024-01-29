@@ -87,7 +87,7 @@ class SplitPane extends React.Component {
     shadowDocument.removeEventListener('touchmove', this.onTouchMove);
   }
 
-  resetSize() {
+  resetSize(defSize) {
     const { size, defaultSize, minSize, maxSize, primary } = this.props;
 
     const initialSize =
@@ -100,8 +100,8 @@ class SplitPane extends React.Component {
       resized: false,
       draggedSize: undefined,
       position: undefined,
-      pane1Size: primary === 'first' ? initialSize : undefined,
-      pane2Size: primary === 'second' ? initialSize : undefined,
+      pane1Size: primary === 'first' ? defSize ?? initialSize : undefined,
+      pane2Size: primary === 'second' ? defSize ?? initialSize : undefined,
     });
   }
 

@@ -410,7 +410,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       },
       {
         key: 'resetSize',
-        value: function resetSize() {
+        value: function resetSize(defSize) {
           var _this$props = this.props,
             size = _this$props.size,
             defaultSize = _this$props.defaultSize,
@@ -426,8 +426,18 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             resized: false,
             draggedSize: undefined,
             position: undefined,
-            pane1Size: primary === 'first' ? initialSize : undefined,
-            pane2Size: primary === 'second' ? initialSize : undefined,
+            pane1Size:
+              primary === 'first'
+                ? defSize !== null && defSize !== void 0
+                  ? defSize
+                  : initialSize
+                : undefined,
+            pane2Size:
+              primary === 'second'
+                ? defSize !== null && defSize !== void 0
+                  ? defSize
+                  : initialSize
+                : undefined,
           });
         },
       },
