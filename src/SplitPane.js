@@ -217,7 +217,6 @@ class SplitPane extends React.Component {
 
           if (onChange) onChange(newSize);
 
-          console.log(' go here');
           this.setState({
             draggedSize: newSize,
             [isPrimaryFirst ? 'pane1Size' : 'pane2Size']: newSize,
@@ -244,6 +243,7 @@ class SplitPane extends React.Component {
     const { instanceProps } = state;
 
     if (instanceProps.size === props.size && props.size !== undefined) {
+      console.log('getSizeUpdate default', instanceProps.size, props.size);
       return {};
     }
 
@@ -257,6 +257,7 @@ class SplitPane extends React.Component {
             state.draggedSize
           );
 
+    console.log('getSizeUpdate ', newSize, props.defaultSize);
     if (props.size !== undefined) {
       newState.draggedSize = newSize;
     }
@@ -337,8 +338,6 @@ class SplitPane extends React.Component {
 
     const pane1Classes = ['Pane1', paneClassName, pane1ClassName].join(' ');
     const pane2Classes = ['Pane2', paneClassName, pane2ClassName].join(' ');
-
-    console.log(this.state);
 
     return (
       <div

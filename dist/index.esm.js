@@ -577,7 +577,6 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                 }
 
                 if (onChange) onChange(newSize);
-                console.log(' go here');
                 this.setState(
                   _defineProperty(
                     {
@@ -686,7 +685,6 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
 
           var pane1Classes = ['Pane1', paneClassName, pane1ClassName].join(' ');
           var pane2Classes = ['Pane2', paneClassName, pane2ClassName].join(' ');
-          console.log(this.state);
           return /*#__PURE__*/ React.createElement(
             'div',
             {
@@ -757,6 +755,11 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
           var instanceProps = state.instanceProps;
 
           if (instanceProps.size === props.size && props.size !== undefined) {
+            console.log(
+              'getSizeUpdate default',
+              instanceProps.size,
+              props.size
+            );
             return {};
           }
 
@@ -769,6 +772,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                   props.maxSize,
                   state.draggedSize
                 );
+          console.log('getSizeUpdate ', newSize, props.defaultSize);
 
           if (props.size !== undefined) {
             newState.draggedSize = newSize;
