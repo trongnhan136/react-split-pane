@@ -422,7 +422,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       },
       {
         key: 'resetSize',
-        value: function resetSize(defSize) {
+        value: function resetSize(doubleClickSize) {
           var _this$props = this.props,
             size = _this$props.size,
             defaultSize = _this$props.defaultSize,
@@ -433,6 +433,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             size !== undefined
               ? size
               : getDefaultSize(defaultSize, minSize, maxSize, null);
+          console.log('DKM doubleClickSize', doubleClickSize);
           this.setState({
             active: false,
             resized: false,
@@ -440,14 +441,14 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             position: undefined,
             pane1Size:
               primary === 'first'
-                ? defSize !== null && defSize !== void 0
-                  ? defSize
+                ? doubleClickSize !== null && doubleClickSize !== void 0
+                  ? doubleClickSize
                   : initialSize
                 : undefined,
             pane2Size:
               primary === 'second'
-                ? defSize !== null && defSize !== void 0
-                  ? defSize
+                ? doubleClickSize !== null && doubleClickSize !== void 0
+                  ? doubleClickSize
                   : initialSize
                 : undefined,
           });
