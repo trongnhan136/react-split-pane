@@ -423,38 +423,19 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       {
         key: 'resetSize',
         value: function resetSize(doubleClickSize) {
-          var _this2 = this;
-
           var _this$props = this.props,
             size = _this$props.size,
             defaultSize = _this$props.defaultSize,
             minSize = _this$props.minSize,
             maxSize = _this$props.maxSize,
             primary = _this$props.primary;
-          var initialSize =
-            size !== undefined
-              ? size
-              : getDefaultSize(defaultSize, minSize, maxSize, null);
-          setTimeout(function () {
-            _this2.setState({
-              active: false,
-              resized: false,
-              draggedSize: undefined,
-              position: undefined,
-              pane1Size:
-                primary === 'first'
-                  ? doubleClickSize !== null && doubleClickSize !== void 0
-                    ? doubleClickSize
-                    : initialSize
-                  : undefined,
-              pane2Size:
-                primary === 'second'
-                  ? doubleClickSize !== null && doubleClickSize !== void 0
-                    ? doubleClickSize
-                    : initialSize
-                  : undefined,
-            });
-          }, 1);
+          this.setState({
+            active: false,
+            resized: false,
+            draggedSize: null,
+            position: null,
+            pane1Size: doubleClickSize,
+          });
         },
       },
       {
@@ -647,7 +628,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
       {
         key: 'render',
         value: function render() {
-          var _this3 = this;
+          var _this2 = this;
 
           var _this$props5 = this.props,
             allowResize = _this$props5.allowResize,
@@ -722,7 +703,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             {
               className: classes.join(' '),
               ref: function ref(node) {
-                _this3.splitPane = node;
+                _this2.splitPane = node;
               },
               style: style,
             },
@@ -732,7 +713,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                 className: pane1Classes,
                 key: 'pane1',
                 eleRef: function eleRef(node) {
-                  _this3.pane1 = node;
+                  _this2.pane1 = node;
                 },
                 size: fullscreen ? undefined : pane1Size,
                 split: split,
@@ -761,7 +742,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
                   className: pane2Classes,
                   key: 'pane2',
                   eleRef: function eleRef(node) {
-                    _this3.pane2 = node;
+                    _this2.pane2 = node;
                   },
                   size: pane2Size,
                   split: split,
