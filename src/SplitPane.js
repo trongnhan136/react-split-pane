@@ -94,18 +94,18 @@ class SplitPane extends React.Component {
       size !== undefined
         ? size
         : getDefaultSize(defaultSize, minSize, maxSize, null);
-
-    console.log('DKM doubleClickSize', doubleClickSize);
-    this.setState({
-      active: false,
-      resized: false,
-      draggedSize: undefined,
-      position: undefined,
-      pane1Size:
-        primary === 'first' ? doubleClickSize ?? initialSize : undefined,
-      pane2Size:
-        primary === 'second' ? doubleClickSize ?? initialSize : undefined,
-    });
+    setTimeout(() => {
+      this.setState({
+        active: false,
+        resized: false,
+        draggedSize: undefined,
+        position: undefined,
+        pane1Size:
+          primary === 'first' ? doubleClickSize ?? initialSize : undefined,
+        pane2Size:
+          primary === 'second' ? doubleClickSize ?? initialSize : undefined,
+      });
+    }, 1);
   }
 
   onMouseDown(event) {
