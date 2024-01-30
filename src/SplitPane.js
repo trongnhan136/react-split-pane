@@ -140,8 +140,9 @@ class SplitPane extends React.Component {
 
     const ownWindow = innerWindow ?? window;
 
-    console.log(minSize, maxSize);
-    if (allowResize && !fullscreen && active) {
+    let diff = maxSize - minSize;
+    let isOK = diff > 2;
+    if (allowResize && !fullscreen && active && isOK) {
       unFocus(this.splitPane.ownerDocument, ownWindow);
       const isPrimaryFirst = this.props.primary === 'first';
       const ref = isPrimaryFirst ? this.pane1 : this.pane2;

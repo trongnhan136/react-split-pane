@@ -499,9 +499,10 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             innerWindow !== null && innerWindow !== void 0
               ? innerWindow
               : window;
-          console.log(minSize, maxSize);
+          var diff = maxSize - minSize;
+          var isOK = diff > 2;
 
-          if (allowResize && !fullscreen && active) {
+          if (allowResize && !fullscreen && active && isOK) {
             unFocus(this.splitPane.ownerDocument, ownWindow);
             var isPrimaryFirst = this.props.primary === 'first';
             var ref = isPrimaryFirst ? this.pane1 : this.pane2;
