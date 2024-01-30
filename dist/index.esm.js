@@ -487,6 +487,7 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
             innerWindow !== null && innerWindow !== void 0
               ? innerWindow
               : window;
+          console.log(minSize, maxSize);
 
           if (allowResize && !fullscreen && active) {
             unFocus(this.splitPane.ownerDocument, ownWindow);
