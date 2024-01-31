@@ -227,10 +227,11 @@ class SplitPane extends React.Component {
     const newState = {};
     const { instanceProps } = state;
 
+    console.log('getSizeUpdate', props, state);
     if (instanceProps.size === props.size && props.size !== undefined) {
       if (
         (state.pane1Size == undefined && props.primary === 'first') ||
-        (state.pane2Size == undefined && props.primary === 'seconds')
+        (state.pane2Size == undefined && props.primary === 'second')
       ) {
         console.log('invalid - maybe change primary - need calculate again');
       } else {
