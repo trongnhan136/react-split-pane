@@ -750,7 +750,16 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
           var instanceProps = state.instanceProps;
 
           if (instanceProps.size === props.size && props.size !== undefined) {
-            return {};
+            if (
+              (state.pane1Size == undefined && props.primary === 'first') ||
+              (state.pane2Size == undefined && props.primary === 'seconds')
+            ) {
+              console.log(
+                'invalid - maybe change primary - need calculate again'
+              );
+            } else {
+              return {};
+            }
           }
 
           var newSize =
