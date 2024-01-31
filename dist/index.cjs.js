@@ -747,18 +747,14 @@ var SplitPane = /*#__PURE__*/ (function (_React$Component) {
         key: 'getSizeUpdate',
         value: function getSizeUpdate(props, state) {
           var newState = {};
-          var instanceProps = state.instanceProps;
-          console.log('getSizeUpdate', props, state);
+          var instanceProps = state.instanceProps; // console.log('getSizeUpdate', props, state);
 
           if (instanceProps.size === props.size && props.size !== undefined) {
             if (
               (state.pane1Size == undefined && props.primary === 'first') ||
               (state.pane2Size == undefined && props.primary === 'second')
-            ) {
-              console.log(
-                'invalid - maybe change primary - need calculate again'
-              );
-            } else {
+            );
+            else {
               return {};
             }
           }
